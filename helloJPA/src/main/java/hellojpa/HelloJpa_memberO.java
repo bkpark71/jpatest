@@ -1,37 +1,36 @@
 package hellojpa;
 
-import domain.Member;
+import domain.MemberO;
+import domain.MemberType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class HelloJpa_autoincrement {
+public class HelloJpa_memberO {
     public static void main(String[] args) {
         // 스프링이 EMF 를 만들어줌. 스프링을 안써서 직접 만듬
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hellojpa");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         // 웹 - localhost:8080/members/add
-        System.out.println("트랜잭션 시작전 !!!");
+        System.out.println("memberO 등록 트랜잭션 시작전 !!!");
 
         try {
             tx.begin();
-            Member member1 = new Member("test");
-            Member member2 = new Member("test");
-            Member member3 = new Member("test");
+            MemberO member = new MemberO("test1", MemberType.GENERAL);
+            MemberO member1 = new MemberO("test2", MemberType.MANAGER);
+
             System.out.println("비영속상태 =======");
-
+            em.persist(member);
             em.persist(member1);
-            System.out.println("1영속상태 =======");
-            em.persist(member2);
-            System.out.println("2영속상태 =======");
-            em.persist(member3);
-            System.out.println("3영속상태 =======");
+            System.out.println("영속상태 =======");
 
-            Member fm1 = em.find(Member.class, member1.getId());
+            MemberO fm = em.find(MemberO.class, member.getId());
+            MemberO fm1 = em.find(MemberO.class, member1.getId());
             System.out.println("1차 캐시에서 가져옴 =======");
+            System.out.println("fm = " + fm);
             System.out.println("fm1 = " + fm1);
 
             System.out.println("커밋전 !!!");
@@ -47,4 +46,3 @@ public class HelloJpa_autoincrement {
         emf.close();
     }
 }
-
