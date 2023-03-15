@@ -1,6 +1,6 @@
 package domain;
 import javax.persistence.*;
-@Entity
+//@Entity
 public class Member {
     @Id
     @Column(name = "member_id")
