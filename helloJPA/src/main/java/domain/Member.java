@@ -7,11 +7,19 @@ import javax.persistence.*;
 public class Member {
     @Id
     @Column(name = "member_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public String username;
 
-//    @Column(name = "team_id")
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                '}';
+    }
+
+    //    @Column(name = "team_id")
 //    public Long teamId;
 //    // Team team;
     //public Team getTeam(){
