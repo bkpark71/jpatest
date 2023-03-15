@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class HelloJpa {
+public class HelloJpa_autoincrement {
     public static void main(String[] args) {
         // 스프링이 EMF 를 만들어줌. 스프링을 안써서 직접 만듬
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hellojpa");
@@ -18,14 +18,21 @@ public class HelloJpa {
 
         try {
             tx.begin();
-            Member member = new Member("test");
-
+            Member member1 = new Member("test");
+            Member member2 = new Member("test");
+            Member member3 = new Member("test");
             System.out.println("비영속상태 =======");
-            em.persist(member);
-            System.out.println("영속상태 =======");
-            Member fm1 = em.find(Member.class, 10L);
+
+            em.persist(member1);
+            System.out.println("1영속상태 =======");
+            em.persist(member2);
+            System.out.println("2영속상태 =======");
+            em.persist(member3);
+            System.out.println("3영속상태 =======");
+
+            Member fm1 = em.find(Member.class, member1.id);
             System.out.println("1차 캐시에서 가져옴 =======");
-            Member findMember = em.find(Member.class, 1L);
+            System.out.println("fm1 = " + fm1);
 
             System.out.println("커밋전 !!!");
             tx.commit();
@@ -40,3 +47,4 @@ public class HelloJpa {
         emf.close();
     }
 }
+
