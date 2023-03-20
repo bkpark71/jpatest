@@ -20,17 +20,29 @@ public class HelloJpa_memberO_team_jpql {
 
         try {
             tx.begin();
-            Team team2 = new Team();
-            team2.setName("newTeam");
-            em.persist(team2);
+//            Team team1 = new Team();
+//            team1.setName("newTeam");
+//            em.persist(team1);
+//
+//            Team team2 = new Team();
+//            team2.setName("newTeam");
+//            em.persist(team2);
+//
+//            MemberO m1=new MemberO();
+//            m1.setTeam(team2);
+//            em.persist(m1);
+//
+//            MemberO m2=new MemberO();
+//            m2.setTeam(team2);
+//            em.persist(m2);
 
-            MemberO m1=new MemberO();
-            m1.setTeam(team2);
-            em.persist(m1);
+
+            em.flush();
+            em.clear();
 
             // 멤버 정보 가져오기
             System.out.println("============eager select ");
-            List resultList = em.createQuery("select m from Member m")
+            List resultList = em.createQuery("select m from MemberO m", MemberO.class)
                     .getResultList();
             System.out.println("resultList = " + resultList);
 
