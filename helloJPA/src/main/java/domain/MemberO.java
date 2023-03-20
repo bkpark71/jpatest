@@ -6,7 +6,7 @@ public class MemberO {
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne   // 1,2,3번 회원이 모두 1번 팀 소속
+    @ManyToOne(fetch = FetchType.EAGER)   // 1,2,3번 회원이 모두 1번 팀 소속
     @JoinColumn(name = "team_id")
     private Team team;
     private String username;
